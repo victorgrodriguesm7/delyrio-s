@@ -19,6 +19,7 @@ routes.post('/cardapio', cardapio.create);
 
 routes.get('/pedido', pedido.index);
 routes.post('/pedido', pedido.create);
+routes.delete('/pedido', pedido.delete);
 
 routes.get('/reserva', reserva.index);
 routes.post('/reserva', reserva.create);

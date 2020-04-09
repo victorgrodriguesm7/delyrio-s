@@ -20,5 +20,22 @@ module.exports = {
         })
 
         return response.json({ uid });
+    },
+    async delete(request, response){
+        const { uid } = request.body;
+
+        const pedido = await connection('pedido')
+                            .where("uid", uid)
+                            .select("user_id").first();
+                            
+        if (!pedido){
+            return response.status(404).json({error: "Pedido not found"});
+        }
+
+        await connection('pedido')
+        .where('uid', uid)
+        .delete();
+
+        return response.status(204).send();
     }
 }
