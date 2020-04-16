@@ -32,5 +32,33 @@ module.exports = {
         });
 
         return response.status(200).json({ uid });
+    },
+    async delete(request,response){
+        const { numeroMesa, hora, user_id, uid} = request.body;
+        const token = request.headers.authorization;
+
+        const funcionario = connection.from("funcionario")
+            .where({
+                uid,
+                token
+            }).first()
+
+        if (!funcionario){
+            return response.json({error: "Funcionario ID or Token Invalid"})
+        }
+        const mesa = await connection.from('reserva')
+            .where({
+                numeroMesa,
+                hora,
+                user_id
+            }).first();
+        
+        if(!mesa){
+            return response.status(404).json({error: "Mesa not found"});
+        }
+
+        mesa.delete();
+
+        return response.status(200).send();
     }
 }

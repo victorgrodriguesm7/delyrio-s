@@ -5,7 +5,6 @@ exports.up = function(knex) {
     table.string("user_id").notNullable();
     table.string('items').notNullable();
     table.decimal('price').notNullable();
-
     table.foreign('user_id').references('uid').inTable('user');
   });
 };

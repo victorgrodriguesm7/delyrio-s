@@ -11,7 +11,7 @@ module.exports = {
     async create(request,response){
         var {name, password, phonenumber, email} = request.body
         const uid = crypto.randomBytes(4).toString('HEX');
-
+        const token = crypto.randomBytes(8).toString('HEX');
         const users = await connection('user')
             .where({
                 "phonenumber" : phonenumber,
@@ -29,7 +29,8 @@ module.exports = {
                 name,
                 password,
                 phonenumber,
-                email
+                email,
+                token
             })
         });
 

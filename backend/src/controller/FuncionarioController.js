@@ -11,12 +11,13 @@ module.exports = {
     async create(request,response){
         var {name, password} = request.body
         const uid = crypto.randomBytes(4).toString('HEX');
-        
+        const token = crypto.randomBytes(8).toString('HEX');
         bcrypt.hash(password, saltrounds, async function(error, password){
             await connection('funcionario').insert({
                 uid,
                 name,
-                password
+                password,
+                token
             })
         })
         

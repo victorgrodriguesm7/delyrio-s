@@ -22,10 +22,21 @@ module.exports = {
         return response.json({ uid });
     },
     async delete(request, response){
-        const { uid } = request.body;
+        const { uid, user_id } = request.body;
+        const token = request.headers.authorization;
+
+        const funcionario = connection.from("funcionario")
+            .where({
+                uid,
+                token
+            }).first()
+
+        if (!funcionario){
+            return response.json({error: "Funcionario ID or Token Invalid"})
+        }
 
         const pedido = await connection('pedido')
-                            .where("uid", uid)
+                            .where("uid", user_id)
                             .select("user_id").first();
                             
         if (!pedido){

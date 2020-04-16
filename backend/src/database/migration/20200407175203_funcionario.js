@@ -4,6 +4,7 @@ exports.up = function(knex) {
     table.string('uid').primary();
     table.string("name").notNullable();
     table.string('password').notNullable();
+    table.string('token').notNullable();
   });
 };
 
