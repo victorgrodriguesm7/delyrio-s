@@ -1,4 +1,7 @@
 const express = require('express');
+const multer = require('multer');
+const storage = require('./storage');
+const upload =  multer({ storage });
 
 const funcionario = require('./controller/FuncionarioController');
 const user = require('./controller/UserController');
@@ -17,7 +20,7 @@ routes.get('/users', user.index);
 routes.post('/users', user.create);
 
 routes.get('/cardapio', cardapio.index);
-routes.post('/cardapio', cardapio.create);
+routes.post('/cardapio', upload.single('image'), cardapio.create);
 routes.delete('/cardapio', cardapio.delete);
 
 routes.get('/pedido', pedido.index);

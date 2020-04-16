@@ -1,5 +1,6 @@
 const connection = require('../database/connection');
 const crypto = require('crypto');
+const fs = require('fs');
 
 module.exports = {
     async index(request, response){
@@ -7,15 +8,21 @@ module.exports = {
         return response.json(cardapios);
     },
     async create(request,response){
-        const {name, description, price} = request.body;
+        const {name, description, price, imagename} = request.body;
+        const extension = imagename.substr(imagename.length - 4, name.length)
         const uid = crypto.randomBytes(4).toString('HEX');
-
+       
         await connection('cardapio').insert({
             uid,
             name,
             description,
             price
         })
+        fs.rename(`./src/images/${imagename}`, `./src/images/${uid}${extension}`, function(err) {
+            if(err){
+                console.log(err);
+            }
+        });
 
         return response.json({ uid });
     },
