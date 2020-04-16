@@ -4,7 +4,6 @@ h1 {
 
 .logon-container {
     width: 100%;
-    max-width: 1400px;
     height: 100vh;
     background: url('../../assets/background-logon.png') no-repeat;
     background-size: 100% 100%;
