@@ -4,6 +4,8 @@ exports.up = function(knex) {
     table.string('uid').primary();
     table.string("user_id").notNullable();
     table.string('items').notNullable();
+    table.string('amount').notNullable();
+    table.decimal('address').notNullable();
     table.decimal('price').notNullable();
     table.foreign('user_id').references('uid').inTable('user');
   });

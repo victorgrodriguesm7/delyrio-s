@@ -2,20 +2,57 @@ const connection = require('../database/connection');
 const crypto = require('crypto');
 
 module.exports = {
-    async index(request, response){
+    async index(request,response){
         pedidos = await connection('pedido').select("*");
-        return response.json(pedidos);
+        formatedpedidos = [];
+        
+        for (pedido of pedidos){
+            items_uid = JSON.parse(pedido.items);
+            items_name = [];
+            for (item of items_uid){
+                item_name = await connection('cardapio')
+                    .where("uid", item)
+                    .select('name').first()
+                items_name.push(
+                    item_name.name
+                );
+            }
+            formatedpedidos.push({
+                "uid": pedido.uid,
+                "items": items_name,
+                "amount" : pedido.amount,
+                "address" : pedido.address,
+                "price": pedido.price
+            });
+        }
+
+        return response.json(formatedpedidos);
     },
     async create(request,response){
-        var {items, price} = request.body;
+        const {items, amount, address} = request.body;
         user_id = request.headers.authorization;
-        items = JSON.stringify(items);
+        var [price, index] = [0, 0]
+
+        for (item of items){
+
+            item_price = await connection('cardapio')
+                .where({
+                    "uid" : item
+                }).select('price').first();
+            
+            item_amount = amount[index];
+            price += item_price.price * item_amount;
+            index++;
+        }
+        
         const uid = crypto.randomBytes(4).toString('HEX');
 
         await connection('pedido').insert({
             uid,
             user_id,
-            items,
+            "items" : JSON.stringify(items),
+            "amount" : JSON.stringify(amount),
+            address,
             price
         })
 
