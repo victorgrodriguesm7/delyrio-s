@@ -59,7 +59,7 @@ module.exports = {
         return response.json({ uid });
     },
     async delete(request, response){
-        const { uid, user_id } = request.body;
+        const { uid, pedidoid } = request.body;
         const token = request.headers.authorization;
 
         const funcionario = connection.from("funcionario")
@@ -73,16 +73,18 @@ module.exports = {
         }
 
         const pedido = await connection('pedido')
-                            .where("uid", user_id)
-                            .select("user_id").first();
+                            .where({
+                                "uid": pedidoid
+                            }).select("*").first();
                             
         if (!pedido){
             return response.status(404).json({error: "Pedido not found"});
         }
 
         await connection('pedido')
-        .where('uid', uid)
-        .delete();
+            .where('uid', pedidoid)
+            .first()
+            .delete();
 
         return response.status(204).send();
     }
