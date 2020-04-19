@@ -82,9 +82,9 @@ module.exports = {
         }
 
         await connection('pedido')
-            .where('uid', pedidoid)
-            .first()
-            .delete();
+            .where({
+                "uid": pedidoid
+            }).first().delete();
 
         return response.status(204).send();
     }

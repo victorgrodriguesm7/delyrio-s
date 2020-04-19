@@ -32,9 +32,10 @@ module.exports = {
         
         const funcionario = connection.from("funcionario")
             .where({
-                uid,
+                "uid": FuncUid,
                 token
-            }).first()
+            })
+            .select("*").first()
 
         if (!funcionario){
             return response.json({error: "Funcionario ID or Token Invalid"})
@@ -48,7 +49,10 @@ module.exports = {
             return response.status(404).json({error: "Cardapio not found"});
         }
 
-        cardapio.delete();
+        await connection.from('cardapio')
+            .where("uid", uid)
+            .first()
+            .delete();
 
         return response.status(200).send();
     }
