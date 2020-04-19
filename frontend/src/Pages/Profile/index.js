@@ -3,11 +3,13 @@ import { Link, useHistory } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
 import swal from 'sweetalert';
 import api from '../../services/api';
+import logoImg from '../../assets/logo.svg';
 import './style.css';
 
 export default function Profile(){
 
     const [pedidos, setPedidos] = useState([]);
+    const [cardapio, setCardapio] = useState([]);
     const [refresh, setRefresh] = useState(true);
     const history = useHistory();
     const token = localStorage.getItem('token');
@@ -19,7 +21,13 @@ export default function Profile(){
         .then(
             response => {
                 setPedidos(response.data)
-            })
+            });
+        api.get('cardapio')
+            .then(
+                response => {
+                    setCardapio(response.data)
+                }
+            );
     }, [refresh]);
 
     async function handleDeletePedido(pedidoid){
@@ -37,19 +45,39 @@ export default function Profile(){
             );
             setPedidos(pedidos.filter(pedido => pedido.uid !== pedidoid));
         }catch(err){
-            swal("Erro ao deletar pedido", "error")
+            swal("Erro ao deletar Pedido", "error")
         }
     }
 
+    async function handleDeleteCardapio(cardapioID){
+        try {
+            await api.delete("cardapio",
+                {
+                    data : {
+                        "uid" : cardapioID,
+                        "funcUid": uid
+                    },
+                    headers : {
+                        Authorization : token
+                    }
+                }
+            );
+            setCardapio(cardapio.filter(item => cardapio.uid !== cardapioID));
+        } catch (err) {
+            swal("Erro ao deletar Cardápio", "error")
+        }
+    }
     function handleLogout(){
         localStorage.clear()
         history.push('/');
     }
     
-    setTimeout(() => setRefresh(!refresh), 150)
+    setTimeout(() => setRefresh(!refresh), 200)
     return (
         <div className="profile-container">
             <header>
+                <img src={logoImg} width={20} height={20} className="logo" alt="Delyrio's"/>
+
                 <span>Bem vindo, {name}</span>
 
                 <Link className="button" to="/profile">
@@ -67,7 +95,9 @@ export default function Profile(){
             {pedidos.map(pedido => 
                 <li>
                     <strong>Pedido {pedido.uid}</strong>
-                        
+                        {pedido.items.map((item, index) => 
+                            <p>{item} x{JSON.parse(pedido.amount)[index]}</p>
+                        )}
                     <strong>Endereço</strong>
                         <p>{pedido.address}</p>
                     <strong>Valor</strong>
@@ -83,15 +113,21 @@ export default function Profile(){
         <h1>Cardapio</h1>
 
         <ul>
-            <li>
-                <strong>Nome</strong>
-                <p>Arroz</p>
-                <strong>Descrição</strong>
-                <p>Arroz Comum</p>
-                <strong>Preço</strong>
-                <p>R$ 10 reais</p>
-                <img src="http://localhost:3333/images/144ec0df.png"/>
-            </li>
+            {cardapio.map(item =>
+                <li>
+                    <strong>Item {item.uid}</strong>
+                    <strong>Nome</strong>
+                    <p>{item.name}</p>
+                    <strong>Descrição</strong>
+                    <p>{item.description}</p>
+                    <strong>Preço</strong>
+                    <p>{Intl.NumberFormat('pt-br', { style: 'currency', currency: "BRL"}).format(item.price)}</p>
+                    <img src={`http://localhost:3333/images/${item.uid}.png`} className="cardapio-img" alt="Delyrio's"/>
+                    <button onClick={() => handleDeleteCardapio(item.uid)} type="button"> 
+                        <FiTrash2 size={20} color="#a8a8b3"/>
+                    </button>
+                </li>
+            )}
         </ul>
     </div> 
     );
