@@ -1,4 +1,4 @@
-import React, { useState, useEffec, useEffect} from 'react';
+import React, { useState , useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
 import swal from 'sweetalert';
@@ -76,11 +76,11 @@ export default function Profile(){
     return (
         <div className="profile-container">
             <header>
-                <img src={logoImg} width={20} height={20} className="logo" alt="Delyrio's"/>
+                <img src={logoImg} width={30} height={30} className="logo" alt="Delyrio's"/>
 
                 <span>Bem vindo, {name}</span>
 
-                <Link className="button" to="/profile">
+                <Link className="button" to="/profile/produto">
                     Cadastar novo Cardápio
                 </Link>
 
@@ -93,7 +93,7 @@ export default function Profile(){
 
         <ul>
             {pedidos.map(pedido => 
-                <li>
+                <li className="pedido">
                     <strong>Pedido {pedido.uid}</strong>
                         {pedido.items.map((item, index) => 
                             <p>{item} x{JSON.parse(pedido.amount)[index]}</p>
@@ -114,7 +114,8 @@ export default function Profile(){
 
         <ul>
             {cardapio.map(item =>
-                <li>
+                <li className="cardapio">
+                    <img src={`http://localhost:3333/images/${item.uid}.png`} className="cardapio-img" alt="Delyrio's"/>
                     <strong>Item {item.uid}</strong>
                     <strong>Nome</strong>
                     <p>{item.name}</p>
@@ -122,7 +123,6 @@ export default function Profile(){
                     <p>{item.description}</p>
                     <strong>Preço</strong>
                     <p>{Intl.NumberFormat('pt-br', { style: 'currency', currency: "BRL"}).format(item.price)}</p>
-                    <img src={`http://localhost:3333/images/${item.uid}.png`} className="cardapio-img" alt="Delyrio's"/>
                     <button onClick={() => handleDeleteCardapio(item.uid)} type="button"> 
                         <FiTrash2 size={20} color="#a8a8b3"/>
                     </button>
