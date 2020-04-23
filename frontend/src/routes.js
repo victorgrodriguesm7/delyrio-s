@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Logon from './Pages/Logon';
 import Profile from './Pages/Profile';
-
+import Cardapio from './Pages/Cardapio';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -22,7 +22,8 @@ export default function Routes(){
         <BrowserRouter>
             <Switch>
                 <Route path='/' exact component={Logon}/>
-                <PrivateRoute path="/profile" component={Profile}/>
+                <PrivateRoute path="/profile" exact component={Profile}/>
+                <PrivateRoute path="/profile/produto" component={Cardapio} />
                 <Route path="*" component={() => <h1>Page not found</h1>} />
             </Switch>
         </BrowserRouter>
