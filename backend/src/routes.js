@@ -1,3 +1,4 @@
+
 const express = require('express');
 const multer = require('multer');
 const storage = require('./storage');
@@ -22,7 +23,12 @@ routes.post('/users', user.create);
 routes.get('/cardapio', cardapio.index);
 routes.post('/cardapio', upload.single('image'), cardapio.create);
 routes.delete('/cardapio', cardapio.delete);
-
+routes.options('/cardapio', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.send(200);
+})
 routes.get('/pedido', pedido.index);
 routes.post('/pedido', pedido.create);
 routes.delete('/pedido', pedido.delete);
