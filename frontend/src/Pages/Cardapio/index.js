@@ -33,14 +33,18 @@ export default function Cardapio(){
     async function handlenNewProduto(e){
         e.preventDefault();
         const bodyFormData = new FormData();
-
+        const extension = imagename.substr(imagename.length - 4, imagename.length)
+        if (extension != ".png"){
+            swal("A imagem do produto precisar ser PNG", "", "error");
+            return;
+        }
         bodyFormData.set("uid", uid);
         bodyFormData.append("name", product);
         bodyFormData.append("description", description);
         bodyFormData.append("price", parseFloat(price));
         bodyFormData.append("image", image[0]);
         bodyFormData.append("imagename", imagename);
-
+        
         try{
             await api.post('/cardapio', 
                 bodyFormData,
@@ -49,6 +53,7 @@ export default function Cardapio(){
                 }}
             );
             handleClearFields(e);
+            swal("Produto cadastrado com sucesso")
         }catch(e){
             swal("Erro ao Criar Produto, tente novamente", "", "error")
         }

@@ -115,7 +115,7 @@ export default function Profile(){
         <ul>
             {cardapio.map(item =>
                 <li className="cardapio">
-                    <img src={`http://localhost:3333/images/${item.uid}.png`} className="cardapio-img" alt="Delyrio's"/>
+                    <img src={`${process.env.REACT_APP_API_URL}/images/${item.uid}.png`} className="cardapio-img" alt="Delyrio's"/>
                     <strong>Item {item.uid}</strong>
                     <strong>Nome</strong>
                     <p>{item.name}</p>
