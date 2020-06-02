@@ -10,7 +10,7 @@ module.exports = {
     async create(request,response){
         const {name, description, price, imagename} = request.body;
 
-        const extension = imagename.substr(imagename.length - 4, name.length)
+        const extension = imagename.substr(imagename.length - 4, imagename.length)
         const uid = crypto.randomBytes(4).toString('HEX');
 
         await connection('cardapio').insert({
