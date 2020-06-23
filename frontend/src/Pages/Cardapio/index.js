@@ -89,15 +89,16 @@ export default function Cardapio(){
                         onChange={e => setPrice(e.target.value)}
                     />
                     <label>Escolha o arquivo do novo produto</label>
-                    <input 
-                        type="file"
-                        onChange={e => {
-                            formatImageName(e.target.value); 
-                            setImage([e.target.files[0]]);
-                        }}
-                    />
+                    
 
                     <div className="button-group">
+                        <input 
+                            type="file"
+                            onChange={e => {
+                                formatImageName(e.target.value); 
+                                setImage([e.target.files[0]]);
+                            }}
+                        />
                         <button className="button" onClick={e => handleClearFields(e)}>Cancelar</button>
                         <button className="button" type="submit">Cadastrar</button>
                     </div>

@@ -46,3 +46,31 @@
 .cardapio-container .content form textarea{
     margin-top: 8px;
 }
+
+.cardapio-container .content form input[type="file"]
+{  
+  width: 100%;
+  padding: 10px;
+  color: #000;
+  background: #f0f0f5;
+  border: 1.5px solid #FF8F00;
+  border-radius: 20px;
+}
+
+.cardapio-container .content input[type="file"]::-webkit-file-upload-button
+{
+  visibility: hidden;
+  width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.cardapio-container .content input[type="file"]::before
+{  
+  content: "Escolha";
+  display: inline-block;
+  float: right;
+  padding: 7.5px;
+  border: 2px solid #FF8F00;
+  border-radius: 20px;
+}
