@@ -1,3 +1,4 @@
+import 'package:aplicativo/src/Pages/Cadastro/cadastroPage.dart';
 import 'package:aplicativo/src/Pages/Home/homePage.dart';
 import 'package:aplicativo/src/Pages/Login/loginController.dart';
 import 'package:aplicativo/src/Pages/Login/loginRepository.dart';
@@ -167,7 +168,10 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               RaisedButton(
                                   onPressed: () {
-                                    print("ue");
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (_) => CadastroPage()),
+                                    );
                                   },
                                   child: Text("Cadastrar"),
                               )
