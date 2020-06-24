@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
           Positioned(
               top: height * 0.08,
               left: width * 0.13,
-              child: Text("De Lyro's  ",
+              child: Text("De Lyrio's  ",
                   style: TextStyle(
                     fontSize: 50,
                     color: Colors.orangeAccent.withOpacity(0.9),

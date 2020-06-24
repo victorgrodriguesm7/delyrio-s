@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                     height: height * 0.12,
                   )
                 ],
-                title: Text("De Lyirio's",
+                title: Text("De Lyrio's",
                     style: TextStyle(color: Colors.yellow, fontSize: 31)),
                 backgroundColor: Colors.redAccent),
             body: TabBarView(

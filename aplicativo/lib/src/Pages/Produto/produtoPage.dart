@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ProdutoPage extends StatefulWidget {
@@ -28,17 +29,22 @@ class _ProdutoPageState extends State<ProdutoPage> {
                 height: height * 0.12
               )
             ],
-            title: Text("De Lyirio's",
-            style: TextStyle(color: Colors.yellow, fontSize: 31)),
+            title: Text("De Lyrio's",
+              style: TextStyle(color: Colors.yellow, fontSize: 31)
+            ),
             backgroundColor: Colors.redAccent
           ),
-          body: Center(
-            child: Container(
+          body: Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Hero( 
-                    child: Image.network(
-                      'https://de-lyrios-backend.herokuapp.com/images/$tag.png',
+                    child: CachedNetworkImage(
+                      imageUrl: 'https://de-lyrios-backend.herokuapp.com/images/$tag.png', 
+                      width: width,
+                      height: height* 0.5,
+                      placeholder: (context, url) => CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                     tag: tag
                   ),
@@ -46,7 +52,6 @@ class _ProdutoPageState extends State<ProdutoPage> {
                   Text("R\$ $price reais")
                 ],
               ),
-            ), 
           ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:aplicativo/src/Pages/Produto/produtoPage.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Produto extends StatefulWidget {
@@ -24,10 +25,12 @@ class _ProdutoState extends State<Produto> {
                 children: [
                 FlatButton(
                   child: Hero( 
-                    child: Image.network(
-                      'https://de-lyrios-backend.herokuapp.com/images/$id.png',
+                    child: CachedNetworkImage(
+                      imageUrl: 'https://de-lyrios-backend.herokuapp.com/images/$id.png', 
                       width: 140,
-                      height: 140
+                      height: 140,
+                      placeholder: (context, url) => CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                     tag: id
                   ),
