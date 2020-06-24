@@ -4,50 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-var listaProdutos = [
-  {
-    "uid": "dac0f135",
-    "name": "Arroz",
-    "description": "Arroz comum",
-    "price": 10
-  },
-  {
-    "uid": "9a6e2af9",
-    "name": "Feijoada",
-    "description": "Feijoada comum",
-    "price": 20
-  },
-  {
-    "uid": "8268b6ca",
-    "name": "Frango",
-    "description": "Frango comum",
-    "price": 15
-  },
-  {
-    "uid": "b07ab5b6",
-    "name": "Bife",
-    "description": "Bife comum",
-    "price": 20
-  },
-  {
-    "uid": "afab45a3",
-    "name": "Coca-Cola",
-    "description": "Coca-Cola de 2L",
-    "price": 8
-  },
-  {
-    "uid": "9d5c6088",
-    "name": "Sukita",
-    "description": "Sukita 2L",
-    "price": 5
-  },
-  {
-    "uid": "6f1ad344",
-    "name": "Frevo 2L",
-    "description": "Pior Refri",
-    "price": 1
-  }
-];
 
 class HomePage extends StatefulWidget {
   final User user;
@@ -61,8 +17,6 @@ class _HomePageState extends State<HomePage> {
   var response;
   cardapio() async {
     response = await http.get('https://de-lyrios-backend.herokuapp.com/cardapio');
-    print(response);
-    print(json.decode(response.body));
     setState(() {
        listaProdutos = json.decode(response.body);
     });
@@ -70,6 +24,8 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     if (listaProdutos == null){  
       cardapio();
       return Container();
@@ -84,8 +40,8 @@ class _HomePageState extends State<HomePage> {
                 actions: [
                   Image.network(
                     'https://de-lyrios-backend.herokuapp.com/images/Assets/logo.png',
-                    width: 140,
-                    height: 140,
+                    width: width * 0.12,
+                    height: height * 0.12,
                   )
                 ],
                 title: Text("De Lyirio's",
