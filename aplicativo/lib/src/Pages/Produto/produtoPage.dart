@@ -12,6 +12,8 @@ class ProdutoPage extends StatefulWidget {
 class _ProdutoPageState extends State<ProdutoPage> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     String tag = widget.tag;
     String description = widget.description;
     int price = widget.price;
@@ -22,8 +24,8 @@ class _ProdutoPageState extends State<ProdutoPage> {
             actions: [
               Image.network(
                 'https://de-lyrios-backend.herokuapp.com/images/Assets/logo.png',
-                width: 140,
-                height: 140,
+                width: width * 0.12,
+                height: height * 0.12
               )
             ],
             title: Text("De Lyirio's",
