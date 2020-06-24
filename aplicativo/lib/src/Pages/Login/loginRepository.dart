@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 class LoginRepository {
   Future<User> doLogin(UserModel model) async {
     var client = http.Client();
+    
     try{
       Map<String, String> headers = {"Content-type": "application/json"};
       final response = await client.post(
