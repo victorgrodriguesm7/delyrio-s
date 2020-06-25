@@ -1,9 +1,10 @@
 aplicativo/gradle-wrapper.jar
-aplicativo//.gradle
-aplicativo//captures/
-aplicativo//gradlew
-aplicativo//gradlew.bat
-aplicativo//local.properties
+aplicativo/.gradle
+aplicativo/captures/
+aplicativo/gradlew
+aplicativo/gradlew.bat
+aplicativo/local.properties
+aplicativo/android/key.properties
 aplicativo/GeneratedPluginRegistrant.java
 aplicativo/.gitignore
 
