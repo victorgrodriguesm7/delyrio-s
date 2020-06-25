@@ -239,10 +239,27 @@ class _CadastroPageState extends State<CadastroPage> {
                       var sucesso = await controller.cadastrar();
                       print(sucesso);
                       if (sucesso == true) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => LoginPage()),//LoginPage
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Cadastro efetuado com sucesso"),
+                              content: Text("Vamos fazer o login ? Let's go"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text("Logar"),
+                                  onPressed: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => LoginPage()
+                                      ), //LoginPage
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          },
                         );
                       } else {
                         _scaffoldKey.currentState.showSnackBar(SnackBar(
