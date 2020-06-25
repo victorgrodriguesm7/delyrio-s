@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   _loginError() {
     _scaffoldKey.currentState.showSnackBar(SnackBar(
       content: Text('Erro de Login'),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.black45,
     ));
   }
   @override
