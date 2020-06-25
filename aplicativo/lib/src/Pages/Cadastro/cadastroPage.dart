@@ -244,7 +244,7 @@ class _CadastroPageState extends State<CadastroPage> {
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: Text("Cadastro efetuado com sucesso"),
-                              content: Text("Vamos fazer o login ? Let's go"),
+                              content: Text("Agora efeture o login com a sua conta"),
                               actions: <Widget>[
                                 FlatButton(
                                   child: Text("Logar"),
