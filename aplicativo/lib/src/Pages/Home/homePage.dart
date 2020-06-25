@@ -118,9 +118,26 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   color: Colors.white,
-                  child: Carrinho(carrinho: carrinho)
-                ),
-              ],
+                  child: Carrinho(
+                    carrinho: carrinho, 
+                    sucess: (){
+                      setState(() {
+                        carrinho = {"items": [], "amount": [], "price": [], "name": []};
+                      });
+                      },
+                    delete: (index){
+                      print(index);
+                      setState(() {
+                        carrinho['items'].removeAt(index);
+                        carrinho['amount'].removeAt(index);
+                        carrinho['price'].removeAt(index);
+                        carrinho['name'].removeAt(index);
+                      });
+                      print(carrinho);
+                    }
+                      )
+                  ),
+                ]
             ),
             bottomNavigationBar: TabBar(
               tabs: [
