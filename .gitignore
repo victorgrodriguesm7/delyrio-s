@@ -11,7 +11,7 @@ aplicativo/.gitignore
 backend/node_modules
 backend/procfile
 backend/images/Assets/*
-backend/gitignore
+backend/.gitignore
 frontend/node_modules
 frontend/*.pnp
 frontend/*.pnp.js
