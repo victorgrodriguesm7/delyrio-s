@@ -113,4 +113,4 @@ flutter run
 
 ## :page_facing_up: Licença
 
-Este projeto está sob a licença MIT. Veja a [Licença](https://github.com/StefanoSaffran/spotify-clone/blob/master/LICENSE) para mais informações
+Este projeto está sob a licença MIT. Veja a [Licença](https://github.com/victorgrodriguesm7/delyrio-s/blob/master/LICENSE) para mais informações
