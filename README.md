@@ -110,3 +110,7 @@ npm start
 # Para executar o aplicativo use esse comando na pasta Aplicativo
 flutter run
 ```
+
+## :page_facing_up: Licença
+
+Este projeto está sob a licença MIT. Veja a [Licença](https://github.com/StefanoSaffran/spotify-clone/blob/master/LICENSE) para mais informações
